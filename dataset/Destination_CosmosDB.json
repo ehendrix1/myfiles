@@ -1,0 +1,14 @@
+{
+	"name": "Destination_CosmosDB",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "CosmosDb1",
+			"type": "LinkedServiceReference"
+		},
+		"type": "DocumentDbCollection",
+		"typeProperties": {
+			"collectionName": "sumd"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

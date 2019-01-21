@@ -1,0 +1,88 @@
+{
+	"name": "Destination_AzureSql_Trip_Lime",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase",
+			"type": "LinkedServiceReference"
+		},
+		"type": "AzureSqlTable",
+		"structure": [
+			{
+				"name": "data_raw",
+				"type": "String"
+			},
+			{
+				"name": "pubTimeStamp",
+				"type": "DateTime"
+			},
+			{
+				"name": "companyName",
+				"type": "String"
+			},
+			{
+				"name": "sumdType",
+				"type": "String"
+			},
+			{
+				"name": "sumdGroup",
+				"type": "String"
+			},
+			{
+				"name": "tripRecordNum",
+				"type": "String"
+			},
+			{
+				"name": "sumdID",
+				"type": "String"
+			},
+			{
+				"name": "tripDuration",
+				"type": "Decimal"
+			},
+			{
+				"name": "tripDistance",
+				"type": "Decimal"
+			},
+			{
+				"name": "startDate",
+				"type": "DateTime"
+			},
+			{
+				"name": "startTime",
+				"type": "TimeSpan"
+			},
+			{
+				"name": "endDate",
+				"type": "DateTime"
+			},
+			{
+				"name": "endTime",
+				"type": "TimeSpan"
+			},
+			{
+				"name": "startLatitude",
+				"type": "Decimal"
+			},
+			{
+				"name": "startLongitude",
+				"type": "Decimal"
+			},
+			{
+				"name": "endLatitude",
+				"type": "Decimal"
+			},
+			{
+				"name": "endLongitude",
+				"type": "Decimal"
+			},
+			{
+				"name": "tripRoute",
+				"type": "String"
+			}
+		],
+		"typeProperties": {
+			"tableName": "[sumd].[trip]"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,48 @@
+{
+	"name": "Destination_AzureSQL_Avail",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase",
+			"type": "LinkedServiceReference"
+		},
+		"type": "AzureSqlTable",
+		"structure": [
+			{
+				"name": "pubdatetime",
+				"type": "String"
+			},
+			{
+				"name": "latitude",
+				"type": "String"
+			},
+			{
+				"name": "longitude",
+				"type": "String"
+			},
+			{
+				"name": "sumdID",
+				"type": "String"
+			},
+			{
+				"name": "sumdType",
+				"type": "String"
+			},
+			{
+				"name": "chargeLevel",
+				"type": "Int32"
+			},
+			{
+				"name": "sumdGroup",
+				"type": "String"
+			},
+			{
+				"name": "costPerMin",
+				"type": "Double"
+			}
+		],
+		"typeProperties": {
+			"tableName": "[sumd].[location]"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

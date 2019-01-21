@@ -1,0 +1,185 @@
+{
+	"name": "CopyPipeline_Lime_Data_Import",
+	"properties": {
+		"description": "copies JSON data from SUMD sources to Azure SQL and to CosmosDB",
+		"activities": [
+			{
+				"name": "Import Lime Location Data to Azure SQL",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Empty Tables",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 3,
+					"retryIntervalInSeconds": 60,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [
+					{
+						"name": "Source",
+						"value": "filedrop/"
+					},
+					{
+						"name": "Destination",
+						"value": "[sumd].[location]"
+					}
+				],
+				"typeProperties": {
+					"source": {
+						"type": "BlobSource",
+						"recursive": true
+					},
+					"sink": {
+						"type": "SqlSink",
+						"writeBatchSize": 300
+					},
+					"enableStaging": false,
+					"parallelCopies": 8,
+					"enableSkipIncompatibleRow": true,
+					"redirectIncompatibleRowSettings": {
+						"linkedServiceName": {
+							"referenceName": "AzureBlobStorage",
+							"type": "LinkedServiceReference"
+						},
+						"path": "error"
+					},
+					"dataIntegrationUnits": 8,
+					"translator": {
+						"type": "TabularTranslator",
+						"columnMappings": {
+							"pubTimestamp": "pubdatetime",
+							"latitude": "latitude",
+							"longitude": "longitude",
+							"sumdID": "sumdID",
+							"sumdType": "sumdType",
+							"chargeLevel": "chargeLevel",
+							"sumdGroup": "sumdGroup",
+							"costPerMin": "costPerMin"
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "AzureBlob_LimeAvail",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "Destination_AzureSQL_Avail",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "Empty Tables",
+				"type": "SqlServerStoredProcedure",
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"typeProperties": {
+					"storedProcedureName": "[dbo].[emptysumdtables]"
+				},
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Import Lime Trip Data to SQL",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Empty Tables",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 3,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [
+					{
+						"name": "Source",
+						"value": "error/lime_trip_2018-10-10-12-19.json"
+					},
+					{
+						"name": "Destination",
+						"value": "[sumd].[trip]"
+					}
+				],
+				"typeProperties": {
+					"source": {
+						"type": "BlobSource",
+						"recursive": true
+					},
+					"sink": {
+						"type": "SqlSink",
+						"writeBatchSize": 1000
+					},
+					"enableStaging": false,
+					"enableSkipIncompatibleRow": true,
+					"redirectIncompatibleRowSettings": {
+						"linkedServiceName": {
+							"referenceName": "AzureBlobStorage",
+							"type": "LinkedServiceReference"
+						},
+						"path": "error"
+					},
+					"translator": {
+						"type": "TabularTranslator",
+						"columnMappings": {
+							"data": "data_raw",
+							"pubTimestamp": "pubTimeStamp",
+							"companyName": "companyName",
+							"sumdType": "sumdType",
+							"sumdGroup": "sumdGroup",
+							"tripRecordNum": "tripRecordNum",
+							"sumdID": "sumdID",
+							"tripDuration": "tripDuration",
+							"tripDistance": "tripDistance",
+							"startDate": "startDate",
+							"startTime": "startTime",
+							"endDate": "endDate",
+							"endTime": "endTime",
+							"startLatitude": "startLatitude",
+							"startLongitude": "startLongitude",
+							"endLatitude": "endLatitude",
+							"endLongitude": "endLongitude",
+							"tripRoute": "tripRoute"
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "Source_AzureBlob_LimeTrip",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "Destination_AzureSql_Trip_Lime",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

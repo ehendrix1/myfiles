@@ -1,0 +1,97 @@
+{
+	"name": "AzureBlob_LimeTrip",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage",
+			"type": "LinkedServiceReference"
+		},
+		"type": "AzureBlob",
+		"structure": [
+			{
+				"name": "data",
+				"type": "String"
+			},
+			{
+				"name": "pubTimestamp",
+				"type": "String"
+			},
+			{
+				"name": "companyName",
+				"type": "String"
+			},
+			{
+				"name": "sumdType",
+				"type": "String"
+			},
+			{
+				"name": "sumdGroup",
+				"type": "String"
+			},
+			{
+				"name": "tripRecordNum",
+				"type": "String"
+			},
+			{
+				"name": "sumdID",
+				"type": "String"
+			},
+			{
+				"name": "tripDuration",
+				"type": "Double"
+			},
+			{
+				"name": "tripDistance",
+				"type": "Double"
+			},
+			{
+				"name": "startDate",
+				"type": "String"
+			},
+			{
+				"name": "startTime",
+				"type": "String"
+			},
+			{
+				"name": "endDate",
+				"type": "String"
+			},
+			{
+				"name": "endTime",
+				"type": "String"
+			},
+			{
+				"name": "startLatitude",
+				"type": "Double"
+			},
+			{
+				"name": "startLongitude",
+				"type": "Double"
+			},
+			{
+				"name": "endLatitude",
+				"type": "Double"
+			},
+			{
+				"name": "endLongitude",
+				"type": "Double"
+			},
+			{
+				"name": "tripRoute",
+				"type": "String"
+			}
+		],
+		"typeProperties": {
+			"format": {
+				"type": "JsonFormat",
+				"filePattern": "setOfObjects",
+				"jsonNodeReference": "$.['data']",
+				"jsonPathDefinition": {
+					"data": "$.['data']"
+				}
+			},
+			"fileName": "lime_trip*",
+			"folderPath": "filedrop/lime/2018/12/01"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

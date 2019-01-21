@@ -1,0 +1,20 @@
+{
+	"name": "Destination_AzureSql_Trip_Bird",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase",
+			"type": "LinkedServiceReference"
+		},
+		"type": "AzureSqlTable",
+		"structure": [
+			{
+				"name": "rawjson",
+				"type": "String"
+			}
+		],
+		"typeProperties": {
+			"tableName": "[sumd].[triprawjson]"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

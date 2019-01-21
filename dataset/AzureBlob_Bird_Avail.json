@@ -1,0 +1,65 @@
+{
+	"name": "AzureBlob_Bird_Avail",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage",
+			"type": "LinkedServiceReference"
+		},
+		"type": "AzureBlob",
+		"structure": [
+			{
+				"name": "pubTimestamp",
+				"type": "String"
+			},
+			{
+				"name": "latitude",
+				"type": "String"
+			},
+			{
+				"name": "longitude",
+				"type": "String"
+			},
+			{
+				"name": "sumdID",
+				"type": "String"
+			},
+			{
+				"name": "sumdType",
+				"type": "String"
+			},
+			{
+				"name": "chargeLevel",
+				"type": "String"
+			},
+			{
+				"name": "sumdGroup",
+				"type": "String"
+			},
+			{
+				"name": "costPerMin",
+				"type": "String"
+			}
+		],
+		"typeProperties": {
+			"format": {
+				"type": "JsonFormat",
+				"filePattern": "setOfObjects",
+				"jsonNodeReference": "$.['data']",
+				"jsonPathDefinition": {
+					"data": "$.['data']",
+					"pubTimestamp": "['SUMD']['pubTimestamp']",
+					"latitude": "['SUMD']['latitude']",
+					"longitude": "['SUMD']['longitude']",
+					"sumdID": "['SUMD']['sumdID']",
+					"sumdType": "['SUMD']['sumdType']",
+					"chargeLevel": "['SUMD']['chargeLevel']",
+					"sumdGroup": "['SUMD']['sumdGroup']",
+					"costPerMin": "['SUMD']['costPerMin']"
+				}
+			},
+			"fileName": "bird_avail*",
+			"folderPath": "filedrop/bird"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

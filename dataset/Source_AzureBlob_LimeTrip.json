@@ -1,0 +1,114 @@
+{
+	"name": "Source_AzureBlob_LimeTrip",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage",
+			"type": "LinkedServiceReference"
+		},
+		"type": "AzureBlob",
+		"structure": [
+			{
+				"name": "data",
+				"type": "String"
+			},
+			{
+				"name": "pubTimestamp",
+				"type": "String"
+			},
+			{
+				"name": "companyName",
+				"type": "String"
+			},
+			{
+				"name": "sumdType",
+				"type": "String"
+			},
+			{
+				"name": "sumdGroup",
+				"type": "String"
+			},
+			{
+				"name": "tripRecordNum",
+				"type": "String"
+			},
+			{
+				"name": "sumdID",
+				"type": "String"
+			},
+			{
+				"name": "tripDuration",
+				"type": "Double"
+			},
+			{
+				"name": "tripDistance",
+				"type": "Double"
+			},
+			{
+				"name": "startDate",
+				"type": "String"
+			},
+			{
+				"name": "startTime",
+				"type": "String"
+			},
+			{
+				"name": "endDate",
+				"type": "String"
+			},
+			{
+				"name": "endTime",
+				"type": "String"
+			},
+			{
+				"name": "startLatitude",
+				"type": "String"
+			},
+			{
+				"name": "startLongitude",
+				"type": "String"
+			},
+			{
+				"name": "endLatitude",
+				"type": "String"
+			},
+			{
+				"name": "endLongitude",
+				"type": "String"
+			},
+			{
+				"name": "tripRoute",
+				"type": "String"
+			}
+		],
+		"typeProperties": {
+			"format": {
+				"type": "JsonFormat",
+				"filePattern": "setOfObjects",
+				"jsonNodeReference": "$.['data']",
+				"jsonPathDefinition": {
+					"data": "$.['data']",
+					"pubTimestamp": "['SUMD']['pubTimestamp']",
+					"companyName": "['SUMD']['companyName']",
+					"sumdType": "['SUMD']['sumdType']",
+					"sumdGroup": "['SUMD']['sumdGroup']",
+					"tripRecordNum": "['SUMD']['tripRecordNum']",
+					"sumdID": "['SUMD']['sumdID']",
+					"tripDuration": "['SUMD']['tripDuration']",
+					"tripDistance": "['SUMD']['tripDistance']",
+					"startDate": "['SUMD']['startDate']",
+					"startTime": "['SUMD']['startTime']",
+					"endDate": "['SUMD']['endDate']",
+					"endTime": "['SUMD']['endTime']",
+					"startLatitude": "['SUMD']['startLatitude']",
+					"startLongitude": "['SUMD']['startLongitude']",
+					"endLatitude": "['SUMD']['endLatitude']",
+					"endLongitude": "['SUMD']['endLongitude']",
+					"tripRoute": "['SUMD']['tripRoute']"
+				}
+			},
+			"fileName": "lime_trip*",
+			"folderPath": "filedrop/lime/2018/12/01"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

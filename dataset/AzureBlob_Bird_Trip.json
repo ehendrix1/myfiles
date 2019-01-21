@@ -1,0 +1,28 @@
+{
+	"name": "AzureBlob_Bird_Trip",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage",
+			"type": "LinkedServiceReference"
+		},
+		"type": "AzureBlob",
+		"structure": [
+			{
+				"name": "data",
+				"type": "String"
+			}
+		],
+		"typeProperties": {
+			"format": {
+				"type": "JsonFormat",
+				"filePattern": "setOfObjects",
+				"jsonPathDefinition": {
+					"data": "$.['data']"
+				}
+			},
+			"fileName": "bird_trip*",
+			"folderPath": "filedrop/bird"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
